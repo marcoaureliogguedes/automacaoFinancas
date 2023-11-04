@@ -79,6 +79,30 @@ plt.title('Análise do Índice IBOVESPA x Média Móvel', fontsize=15, fontweigh
 plt.ylabel('Preços em (R$)')
 plt.show()
 
+# PLOTLY
+# Gráfico
+fig = px.line(df_ibov, x=df_ibov.index, y='Adj Close',
+              color_discrete_sequence=px.colors.qualitative.Set2,
+              title='Análise do Índice IBOVESPA',
+              template='plotly_dark')
+
+fig.update_layout(xaxis=dict(rangeselector = dict(font = dict( color = "black"))))
+
+fig.update_xaxes(
+    rangeslider_visible=True,
+    rangeselector=dict(
+        buttons=list([
+            dict(count=1, label='1m', step='month', stepmode='backward'),
+            dict(count=6, label='6m', step='month', stepmode='backward'),
+            dict(count=1, label='YTD', step='year', stepmode='todate'),
+            dict(count=1, label='1y', step='year', stepmode='backward'),
+            dict(step='all')
+        ])
+    )
+)
+
+fig.show()
+
 # Cotação Máxima
 cotacao_maxima = np.amax(df_ibov)
 print(f'A cotação máxima do índice IBOVESPA no período foi de: {cotacao_maxima:,.0f}')
@@ -135,6 +159,24 @@ plt.tick_params(axis='x', length=0)
 plt.tick_params(axis='y', length=0)
 plt.title('Carteira Normalizada', fontsize=15, fontweight='bold')
 plt.box(False)
+plt.show()
+
+# Visualizando os ativos em gráficos individuais
+
+# Estilo
+plt.style.use('dark_background')
+
+fig, axs = plt.subplots(nrows=9, ncols=1, figsize=(10,15), sharex=True)
+
+ativos = ['AGRO3.SA', 'B3SA3.SA', 'EGIE3.SA', 'LEVE3.SA', 'ODPV3.SA', 'PRIO3.SA', 'PSSA3.SA', 'SUZB3.SA', 'WEGE3.SA']
+
+for i, ativo in enumerate(ativos):
+    axs[i].plot(df_cotacoesNorm.index, df_cotacoesNorm[ativo], label=ativo, color=f'C{i}')
+    axs[i].legend()
+    
+fig.suptitle('Analisando a Variação Diária dos Ativos da Carteira', fontsize=12, fontweight='bold')
+fig.supylabel('Variação Percentual')
+    
 plt.show()
 
 # CALCULANDO O RETORNO DA CARTEIRA
