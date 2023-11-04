@@ -1,4 +1,8 @@
 # automacaoFinancas
+
+## Projeto
+
+O projeto de análise de dados e automação coleta dados do Yahoo Finance e tem como objetivo avaliar e entender a relação de uma carteira de ativos e o índice Ibovespa, o principal indicador do desempenho médio das ações listadas na B3, a bolsa de valores brasileira.
  
 Análise Descritiva o que é?
 
